@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
     "postinstall": "npm rebuild bcrypt",
-=======
->>>>>>> 4e369270197bbbc8af5c60ae919df88f0eedcd0c
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
