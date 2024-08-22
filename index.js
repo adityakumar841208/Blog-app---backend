@@ -3,7 +3,6 @@ const User = require('./userModel');
 const Blog = require('./blogModel');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
@@ -35,8 +34,7 @@ app.post('/signin', async (req, res) => {
             return res.send('User already exists');
         }
 
-        const bcryptPass = await bcrypt.hash(password, 10);
-        const user = await User.create({ email, password: bcryptPass });
+        const user = await User.create({ email, password });
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
         res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'lax' });
@@ -60,7 +58,7 @@ app.post('/login', async (req, res) => {
             return res.status(400).send('User does not exist');
         }
 
-        const isMatch = await bcrypt.compare(password, existingUser.password);
+        const isMatch =password === existingUser.password ;
         if (!isMatch) {
             return res.status(401).send('Invalid credentials');
         }
