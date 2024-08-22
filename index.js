@@ -10,10 +10,13 @@ const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET;
 const app = express();
 
-app.use(cors({
-    origin: 'https://reactblogapp123.netlify.app',
-    credentials: true
-}));
+const corsOptions = {
+  origin: 'https://reactblogapp123.netlify.app', // Allow only this origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true // Allow cookies to be sent
+};
+
 app.use(express.json());
 app.use(cookieParser());
 
