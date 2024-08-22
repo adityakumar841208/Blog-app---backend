@@ -44,7 +44,7 @@ app.post('/signin', async (req, res) => {
         res.send('User signed up successfully');
     } catch (error) {
         console.error('Error detected in signin:', error);
-        res.status(500).send('Internal server error');
+        res.status(500).send('Internal server error',error);
     }
 });
 
