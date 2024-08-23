@@ -41,7 +41,7 @@ app.post('/signin', async (req, res) => {
         const user = await User.create({ email, password });
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
-        res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'lax' });
+        res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'None', secure:true });
         res.send('User signed up successfully');
     } catch (error) {
         console.error('Error detected in signin:', error);
@@ -69,7 +69,7 @@ app.post('/login', async (req, res) => {
 
         const token = jwt.sign({ userId: existingUser._id }, JWT_SECRET, { expiresIn: '1h' });
 
-        res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'lax' });
+        res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'None', secure:true });
         res.send('Successfully logged in');
     } catch (error) {
         console.error('Error detected in login:', error);
